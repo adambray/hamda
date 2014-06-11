@@ -1,3 +1,4 @@
+# Loop for the main menu
 loop do
   puts("Welcome to HAMda")
   puts("Type 1 to Convert temperatures")
@@ -24,4 +25,4 @@ loop do
   else
     puts("Please choose a valid menu option")
   end
-end
+end # ends loop for main menu
