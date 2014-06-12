@@ -1,14 +1,18 @@
+require_relative './person.rb'
+
 todo_list = [
   "Wash the car",
   "Go Shopping",
   "World Domination"
 ]
 
-personal_info = {
-  "name" => "Hari",
-  "age" => 50,
-  "favorite_food" => "Bananas"
-}
+# personal_info = {
+#   "name" => "Hari",
+#   "age" => 50,
+#   "favorite_food" => "Bananas"
+# }
+current_user = Person.new("Hari", 50, "Bananas")
+
 
 def display_heading(text)
   puts("-----------------------------------------")
@@ -28,12 +32,12 @@ def main_menu()
   puts("-----------------------------------------")
 end
 
-def personal_info_menu(personal_info)
+def personal_info_menu(person)
   # Personal Info
   display_heading("Personal Information")
-  puts("Name: #{personal_info["name"]}")
-  puts("Age: #{personal_info["age"]}")
-  puts("Favorite Food: #{personal_info["favorite_food"]}")
+  puts("Name: #{person.name}")
+  puts("Age: #{person.age}")
+  puts("Favorite Food: #{person.favorite_food}")
 
   # Edit Personal Info Menu
   puts("1. Edit name")
@@ -41,24 +45,24 @@ def personal_info_menu(personal_info)
   puts("3. Edit favorite food")
 end
 
-def personal_info_action(choice, personal_info)
+def personal_info_action(choice, person)
   # Name change
   if choice == "1"
     puts("What would you like to change it to?")
-    name_change = gets().chomp()
-    personal_info["name"] = name_change
+    new_name = gets().chomp()
+    person.rename(new_name)
 
   # Age change
   elsif choice == "2"
     puts("What would you like to change it to?")
-    age_change = gets().chomp()
-    personal_info["age"] = age_change
+    new_age = gets().chomp().to_i
+    person.change_age(new_age)
 
   # Favorite food change
   elsif choice == "3"
     puts("What would you like to change it to?")
-    favorite_food_change = gets().chomp()
-    personal_info["favorite_food"] = favorite_food_change
+    new_favorite_food = gets().chomp()
+    person.change_favorite_food(new_favorite_food)
   end
 end
 
@@ -139,9 +143,9 @@ loop do
   user_input = gets().chomp()
 
   if user_input == "1"
-    personal_info_menu(personal_info)
+    personal_info_menu(current_user)
     edit_info_input = gets().chomp()
-    personal_info_action(edit_info_input, personal_info)
+    personal_info_action(edit_info_input, current_user)
 
   # Temperature Converter
   elsif user_input == "2"
